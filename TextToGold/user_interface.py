@@ -2,6 +2,8 @@ import random
 
 
 class UserInterface:
+    __LEARNED_ASSOCIATIONS = 0.8  # the rate at which the program has learned to associate pairs
+
     def __init__(self, text_chunks):
         self.__text_chunks = text_chunks
         self.__user_input_count = 0
@@ -21,9 +23,13 @@ class UserInterface:
         for i, chunk in enumerate(sample_chunks):
             print(f"Chunk {i + 1}: {chunk.text}")
 
-    # Method to ask user for confirmation
+    # Method to ask user for confirmation until such time as the program
+    # has learned to associate adjectives and nouns at least
+    # (1.0 - self.__LEARNED_ASSOCIATIONS)% of the time
+    # TODO: Work on this logic as it tends to terminate too early -- uncomment the if below to begin
     def ask_user_confirmation(self, noun, adjective):
-        if self.__user_input_count / max(1, self.__total_relations) < 0.2:
+#        if (float(self.__user_input_count / max(1, self.__total_relations))
+#                < (1.0 - self.__LEARNED_ASSOCIATIONS)):
             user_input = input(f"Does the adjective '{adjective}' describe the noun '{noun}'? (y/n): ")
             self.__total_relations += 1
             if user_input.lower() == 'y':
@@ -32,4 +38,6 @@ class UserInterface:
             elif user_input.lower() == 'n':
                 return False
             else:
-                print("Enter y for yes, n for no.")
+                user_input = input("Enter y for yes, n for no. Press x to terminate: ")
+                if user_input.lower() == 'x':
+                    exit()  # TODO: Replace this conditional later once program is interactive

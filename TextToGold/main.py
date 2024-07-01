@@ -22,7 +22,7 @@ text_data = [
      "She should not question patient or decide for the patient if it's "
      "emergency or not especially that she is not the one who experiencing pain. "
      " After we left the intake and go in the waiting area we heard her talking "
-     "to her co-worker regarding to my sister case.It’s really unprofessional. "
+     "to her co-worker regarding to my sister case. It's really unprofessional. "
      " She should not treat patients that way!"),
     ("I experienced a medical emergency today that resulted in a visit to "
      "the emergency department at VGH. I was attended to promptly and treated "
@@ -34,7 +34,7 @@ text_data = [
 ]
 
 # Create a list of TextChunk objects for each text chunk in text_data:
-text_chunks = [TextChunk(text) for text in text_data]
+text_chunks = [TextChunk(text.lower()) for text in text_data]
 
 # Initialize TaxonomyBuilder with text chunks
 taxonomy_builder = TaxonomyBuilder(text_chunks)
