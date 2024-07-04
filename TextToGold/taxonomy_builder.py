@@ -18,7 +18,8 @@ class TaxonomyBuilder:
     # Method to build the taxonomy
     def build_taxonomy(self, user_interface):
         for chunk in self.__text_chunks:
-            nouns, adjectives = chunk.extract_nouns_and_adjectives()
+            nouns = chunk.extract_nouns()
+            adjectives = chunk.extract_adjectives()
             for noun in nouns:
                 if noun not in self.__noun_to_adjectives:
                     self.__noun_to_adjectives[noun] = set()  # new noun entry, ready for adj.

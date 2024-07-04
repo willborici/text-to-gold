@@ -19,7 +19,28 @@ class TextChunk:
 
     # Method to extract nouns and adjectives as sets
     # (we care about unique, unordered elements, but recast them to lists for convenience
-    def extract_nouns_and_adjectives(self):
+    def extract_nouns_and_qualifiers(self):
         nouns = list(set([word for word, pos in self.__pos_tags if pos.startswith('NN')]))
+        qualifiers = (self.extract_adjectives() + self.extract_adverbs() +
+                      self.extract_determiners() + self.extract_possessives())
+        return nouns, qualifiers
+
+    def extract_nouns(self):
+        nouns = list(set([word for word, pos in self.__pos_tags if pos.startswith('NN')]))
+        return nouns
+
+    def extract_adjectives(self):
         adjectives = list(set([word for word, pos in self.__pos_tags if pos.startswith('JJ')]))
-        return nouns, adjectives
+        return adjectives
+
+    def extract_adverbs(self):
+        adverbs = list(set([word for word, pos in self.__pos_tags if pos.startswith('RB')]))
+        return adverbs
+
+    def extract_determiners(self):
+        determiners = list(set([word for word, pos in self.__pos_tags if pos.startswith('DT')]))
+        return determiners
+
+    def extract_possessives(self):
+        possessives = list(set([word for word, pos in self.__pos_tags if pos in ['PRP$', 'PRP']]))
+        return possessives
