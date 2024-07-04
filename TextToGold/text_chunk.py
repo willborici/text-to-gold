@@ -23,7 +23,8 @@ class TextChunk:
         nouns = list(set([word for word, pos in self.__pos_tags if pos.startswith('NN')]))
         qualifiers = (self.extract_adjectives() + self.extract_adverbs() +
                       self.extract_determiners() + self.extract_possessives())
-        return nouns, qualifiers
+        # return nouns and a unique list o qualifiers
+        return nouns, list(set(qualifiers))
 
     def extract_nouns(self):
         nouns = list(set([word for word, pos in self.__pos_tags if pos.startswith('NN')]))

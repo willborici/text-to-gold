@@ -20,6 +20,7 @@ class TaxonomyBuilder:
         for chunk in self.__text_chunks:
             nouns = chunk.extract_nouns()
             adjectives = chunk.extract_adjectives()
+            # nouns, adjectives = chunk.extract_nouns_and_qualifiers() TODO: generalize to qualifiers
             for noun in nouns:
                 if noun not in self.__noun_to_adjectives:
                     self.__noun_to_adjectives[noun] = set()  # new noun entry, ready for adj.
